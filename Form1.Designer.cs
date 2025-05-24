@@ -532,6 +532,7 @@
             this.Note_Box.TabIndex = 37;
             this.Note_Box.Text = "For Any Issues Contact itssomeguy. On Discord";
             this.Note_Box.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.Note_Box.TextChanged += new System.EventHandler(this.Note_Box_TextChanged);
             // 
             // ReaperV1
             // 
