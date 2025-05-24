@@ -7,5 +7,5 @@ This is one of my first C# Windows Forms App's, in this case a little tool wich 
 
 The programm is old and has hardcoded paths, the default game files are on C drive so you might have to change them for you to be working
 
-maybe future updates ( asa )
+maybe future updates
 
