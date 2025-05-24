@@ -16,11 +16,7 @@ C:\Users\cedri\source\repos\CedrickGD\ReaperV2--master\obj\Debug\Interop.WMPLib.
 C:\Users\cedri\source\repos\CedrickGD\ReaperV2--master\obj\Debug\Interop.WMPNSSCI.dll
 C:\Users\cedri\source\repos\CedrickGD\ReaperV2--master\obj\Debug\testrun2.csproj.ResolveComReference.cache
 C:\Users\cedri\source\repos\CedrickGD\ReaperV1\bin\Debug\launch.mp3
-C:\Users\cedri\source\repos\CedrickGD\ReaperV1\bin\Debug\testrun2.exe.config
-C:\Users\cedri\source\repos\CedrickGD\ReaperV1\bin\Debug\testrun2.exe
-C:\Users\cedri\source\repos\CedrickGD\ReaperV1\bin\Debug\testrun2.pdb
 C:\Users\cedri\source\repos\CedrickGD\ReaperV1\obj\Debug\testrun2.csproj.AssemblyReference.cache
-C:\Users\cedri\source\repos\CedrickGD\ReaperV1\obj\Debug\testrun2.exe.config
 C:\Users\cedri\source\repos\CedrickGD\ReaperV1\obj\Debug\Interop.MediaPlayer.dll
 C:\Users\cedri\source\repos\CedrickGD\ReaperV1\obj\Debug\Interop.WMPDXMLib.dll
 C:\Users\cedri\source\repos\CedrickGD\ReaperV1\obj\Debug\Interop.WMPLauncher.dll
@@ -28,8 +24,11 @@ C:\Users\cedri\source\repos\CedrickGD\ReaperV1\obj\Debug\Interop.WMPLib.dll
 C:\Users\cedri\source\repos\CedrickGD\ReaperV1\obj\Debug\Interop.WMPNSSCI.dll
 C:\Users\cedri\source\repos\CedrickGD\ReaperV1\obj\Debug\testrun2.csproj.ResolveComReference.cache
 C:\Users\cedri\source\repos\CedrickGD\ReaperV1\obj\Debug\testrun2.ReaperV1.resources
-C:\Users\cedri\source\repos\CedrickGD\ReaperV1\obj\Debug\testrun2.Properties.Resources.resources
 C:\Users\cedri\source\repos\CedrickGD\ReaperV1\obj\Debug\testrun2.csproj.GenerateResource.cache
 C:\Users\cedri\source\repos\CedrickGD\ReaperV1\obj\Debug\testrun2.csproj.CoreCompileInputs.cache
-C:\Users\cedri\source\repos\CedrickGD\ReaperV1\obj\Debug\testrun2.exe
-C:\Users\cedri\source\repos\CedrickGD\ReaperV1\obj\Debug\testrun2.pdb
+C:\Users\cedri\source\repos\CedrickGD\ReaperV1\bin\Debug\ReaperV2.exe.config
+C:\Users\cedri\source\repos\CedrickGD\ReaperV1\bin\Debug\ReaperV2.exe
+C:\Users\cedri\source\repos\CedrickGD\ReaperV1\bin\Debug\ReaperV2.pdb
+C:\Users\cedri\source\repos\CedrickGD\ReaperV1\obj\Debug\ReaperV2.Properties.Resources.resources
+C:\Users\cedri\source\repos\CedrickGD\ReaperV1\obj\Debug\ReaperV2.exe
+C:\Users\cedri\source\repos\CedrickGD\ReaperV1\obj\Debug\ReaperV2.pdb

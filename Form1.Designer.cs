@@ -528,6 +528,7 @@
             this.Note_Box.ForeColor = System.Drawing.SystemColors.InactiveBorder;
             this.Note_Box.Location = new System.Drawing.Point(795, 376);
             this.Note_Box.Name = "Note_Box";
+            this.Note_Box.ReadOnly = true;
             this.Note_Box.Size = new System.Drawing.Size(266, 13);
             this.Note_Box.TabIndex = 37;
             this.Note_Box.Text = "For Any Issues Contact itssomeguy. On Discord";
