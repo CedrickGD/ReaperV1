@@ -537,7 +537,7 @@ namespace ReaperV2
             }
         }
 
-        private void ConnectButton_Click(object sender, EventArgs e)
+        private async void ConnectButton_Click(object sender, EventArgs e)
         {
             try
             {
@@ -549,59 +549,35 @@ namespace ReaperV2
                     string ip = parts[0];
                     int queryPort = int.Parse(parts[1]);
 
-                    // For ARK servers, try common game port conversions
-                    int[] possibleGamePorts;
+                    connectButton.Enabled = false;
+                    connectButton.Text = "FINDING PORTS...";
 
-                    if (queryPort >= 27015 && queryPort <= 27025)
-                    {
-                        // Common ARK server setup: query port 27015+ maps to game port 7777+
-                        int baseGamePort = 7777 + (queryPort - 27015);
-                        possibleGamePorts = new int[] {
-                            baseGamePort,           // Most common: 7777, 7778, 7779, etc.
-                            queryPort - 1,          // Some servers: game port = query port - 1
-                            queryPort,              // Direct connection attempt
-                            7777,                   // Default ARK port
-                            7778, 7779, 7780       // Other common ARK ports
-                        };
-                    }
-                    else
-                    {
-                        // For other port ranges, try standard variations
-                        possibleGamePorts = new int[] {
-                            queryPort,              // Direct attempt
-                            queryPort - 1,          // Common pattern
-                            queryPort + 1,          // Less common
-                            7777,                   // Default ARK
-                            7778, 7779, 7780       // Standard ARK ports
-                        };
-                    }
+                    // Discover the actual game port
+                    int gamePort = await DiscoverGamePort(ip, queryPort);
 
-                    // Try each possible game port
-                    bool connected = false;
-                    foreach (int gamePort in possibleGamePorts.Distinct())
+                    if (gamePort > 0)
                     {
                         try
                         {
                             string steamUrl = $"steam://connect/{ip}:{gamePort}";
                             Process.Start(new ProcessStartInfo(steamUrl) { UseShellExecute = true });
 
-                            ShowMessage($"Connection attempt launched!\n\n" +
-                                      $"Trying to connect to: {ip}:{gamePort}\n\n" +
-                                      $"If this doesn't work, the server might use a different game port.\n" +
-                                      $"Check server info or try the 'Try All Ports' option below.",
+                            ShowMessage($"Connection launched successfully!\n\n" +
+                                      $"Server: {ip}:{gamePort}\n" +
+                                      $"Query Port: {queryPort}\n" +
+                                      $"Game Port: {gamePort} (discovered)\n\n" +
+                                      $"Steam should now show the connection dialog.",
                                       "Connecting", MessageBoxIcon.Information);
-                            connected = true;
-                            break;
                         }
-                        catch
+                        catch (Exception ex)
                         {
-                            continue;
+                            ShowMessage($"Found game port {gamePort} but failed to launch Steam:\n{ex.Message}",
+                                      "Steam Launch Error", MessageBoxIcon.Error);
                         }
                     }
-
-                    if (!connected)
+                    else
                     {
-                        ShowConnectionHelp(ip, queryPort);
+                        ShowAdvancedConnectionHelp(ip, queryPort);
                     }
                 }
                 else
@@ -613,6 +589,243 @@ namespace ReaperV2
             {
                 ShowMessage($"Failed to connect:\n{ex.Message}", "Error", MessageBoxIcon.Error);
             }
+            finally
+            {
+                connectButton.Enabled = true;
+                connectButton.Text = "CONNECT NOW";
+            }
+        }
+
+        private async Task<int> DiscoverGamePort(string ip, int queryPort)
+        {
+            // Comprehensive list of ports to test for ARK servers
+            List<int> portsToTest = new List<int>();
+
+            // Add query port variations
+            portsToTest.Add(queryPort);
+            portsToTest.Add(queryPort - 1);
+            portsToTest.Add(queryPort + 1);
+
+            // Add calculated ports based on query port
+            if (queryPort >= 27015 && queryPort <= 27025)
+            {
+                int calculatedPort = 7777 + (queryPort - 27015);
+                portsToTest.Add(calculatedPort);
+            }
+
+            // Add common ARK server ports
+            portsToTest.AddRange(new int[] {
+                7777, 7778, 7779, 7780, 7781, 7782, 7783, 7784, 7785,
+                27000, 27001, 27002, 27003, 27004, 27005,
+                28000, 28001, 28002, 28003, 28004, 28005
+            });
+
+            // Remove duplicates and sort
+            portsToTest = portsToTest.Distinct().OrderBy(p => Math.Abs(p - queryPort)).ToList();
+
+            // Test each port for connectivity
+            var tasks = portsToTest.Take(15).Select(port => TestGamePort(ip, port)).ToArray();
+            var results = await Task.WhenAll(tasks);
+
+            // Return the first working port
+            for (int i = 0; i < results.Length; i++)
+            {
+                if (results[i])
+                {
+                    return portsToTest[i];
+                }
+            }
+
+            return 0; // No working port found
+        }
+
+        private async Task<bool> TestGamePort(string ip, int port)
+        {
+            try
+            {
+                // Test TCP connection (ARK game servers use TCP)
+                using (var tcpClient = new TcpClient())
+                {
+                    var connectTask = tcpClient.ConnectAsync(ip, port);
+                    var completed = await Task.WhenAny(connectTask, Task.Delay(2000));
+
+                    if (completed == connectTask && tcpClient.Connected)
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch
+            {
+                // Ignore connection failures
+            }
+
+            return false;
+        }
+
+        private void ShowAdvancedConnectionHelp(string ip, int queryPort)
+        {
+            Form helpForm = new Form()
+            {
+                Text = "Connection Troubleshooting",
+                Size = new Size(650, 500),
+                StartPosition = FormStartPosition.CenterParent,
+                BackColor = BackgroundColor,
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                MaximizeBox = false,
+                MinimizeBox = false,
+                ShowIcon = false
+            };
+
+            Panel panel = new Panel()
+            {
+                Location = new Point(20, 20),
+                Size = new Size(590, 380),
+                BackColor = PanelColor
+            };
+
+            Label titleLabel = new Label()
+            {
+                Text = "⚠️ Could Not Find Game Port",
+                Font = new Font("Segoe UI", 14, FontStyle.Bold),
+                ForeColor = Color.FromArgb(255, 165, 0),
+                Location = new Point(15, 15),
+                Size = new Size(560, 30)
+            };
+
+            RichTextBox infoTextBox = new RichTextBox()
+            {
+                Location = new Point(15, 50),
+                Size = new Size(560, 200),
+                BackColor = InputColor,
+                ForeColor = TextColor,
+                ReadOnly = true,
+                Font = new Font("Segoe UI", 9),
+                Text = $"Server Query: {ip}:{queryPort} ✅ (Working)\n" +
+                       $"Game Connection: Unable to auto-discover ❌\n\n" +
+
+                       $"POSSIBLE SOLUTIONS:\n\n" +
+
+                       $"1. SERVER MAY BE PASSWORDED:\n" +
+                       $"   Some servers require a password that's not shown publicly.\n\n" +
+
+                       $"2. DIFFERENT CONNECTION METHOD:\n" +
+                       $"   Try connecting through Steam Server Browser:\n" +
+                       $"   Steam → View → Servers → Favorites → Add Server\n" +
+                       $"   Use: {ip}:{queryPort}\n\n" +
+
+                       $"3. MANUAL PORT TESTING:\n" +
+                       $"   Common ARK ports: 7777, 7778, 7779\n" +
+                       $"   Try: steam://connect/{ip}:7777\n\n" +
+
+                       $"4. SERVER-SPECIFIC INFO:\n" +
+                       $"   Check the server's website or Discord for exact connection details.\n\n" +
+
+                       $"5. BATTLEYE/ANTI-CHEAT:\n" +
+                       $"   Some servers require specific game versions or mods."
+            };
+
+            Button steamBrowserButton = new Button()
+            {
+                Text = "Open Steam Server Browser",
+                Location = new Point(15, 260),
+                Size = new Size(180, 35),
+                BackColor = Color.FromArgb(0, 120, 215),
+                ForeColor = TextColor,
+                FlatStyle = FlatStyle.Flat,
+                Font = new Font("Segoe UI", 9, FontStyle.Bold)
+            };
+            steamBrowserButton.Click += (s, e) => {
+                try
+                {
+                    Process.Start(new ProcessStartInfo("steam://open/servers") { UseShellExecute = true });
+                    ShowMessage($"Steam Server Browser opened!\n\nAdd this server manually:\n{ip}:{queryPort}",
+                               "Steam Browser", MessageBoxIcon.Information);
+                }
+                catch { }
+            };
+
+            Button copyAddressButton = new Button()
+            {
+                Text = "Copy Server Address",
+                Location = new Point(205, 260),
+                Size = new Size(150, 35),
+                BackColor = GreenAccent,
+                ForeColor = TextColor,
+                FlatStyle = FlatStyle.Flat,
+                Font = new Font("Segoe UI", 9, FontStyle.Bold)
+            };
+            copyAddressButton.Click += (s, e) => {
+                Clipboard.SetText($"{ip}:{queryPort}");
+                ShowMessage("Server address copied to clipboard!", "Copied", MessageBoxIcon.Information);
+            };
+
+            Button tryManualButton = new Button()
+            {
+                Text = "Try Manual Ports",
+                Location = new Point(365, 260),
+                Size = new Size(130, 35),
+                BackColor = Color.FromArgb(180, 0, 180),
+                ForeColor = TextColor,
+                FlatStyle = FlatStyle.Flat,
+                Font = new Font("Segoe UI", 9, FontStyle.Bold)
+            };
+            tryManualButton.Click += (s, e) => TryManualPorts(ip, helpForm);
+
+            Button closeButton = new Button()
+            {
+                Text = "Close",
+                Location = new Point(520, 420),
+                Size = new Size(100, 30),
+                BackColor = Color.FromArgb(139, 0, 0),
+                ForeColor = TextColor,
+                FlatStyle = FlatStyle.Flat,
+                Font = new Font("Segoe UI", 9, FontStyle.Bold)
+            };
+            closeButton.Click += (s, e) => helpForm.Close();
+
+            panel.Controls.AddRange(new Control[] {
+                titleLabel, infoTextBox, steamBrowserButton, copyAddressButton, tryManualButton
+            });
+            helpForm.Controls.AddRange(new Control[] { panel, closeButton });
+
+            ApplyButtonStyle(steamBrowserButton, Color.FromArgb(0, 120, 215), Color.FromArgb(0, 140, 235));
+            ApplyButtonStyle(copyAddressButton, GreenAccent, GreenHover);
+            ApplyButtonStyle(tryManualButton, Color.FromArgb(180, 0, 180), Color.FromArgb(200, 0, 200));
+            ApplyButtonStyle(closeButton, Color.FromArgb(139, 0, 0), Color.FromArgb(200, 0, 0));
+            AddPanelBorder(panel);
+
+            helpForm.ShowDialog();
+        }
+
+        private void TryManualPorts(string ip, Form parentForm)
+        {
+            parentForm.Close();
+
+            int[] commonPorts = { 7777, 7778, 7779, 7780, 7781, 27000, 27001, 27002 };
+
+            StringBuilder result = new StringBuilder();
+            result.AppendLine("Launching manual connection attempts...\n");
+
+            foreach (int port in commonPorts)
+            {
+                try
+                {
+                    string steamUrl = $"steam://connect/{ip}:{port}";
+                    Process.Start(new ProcessStartInfo(steamUrl) { UseShellExecute = true });
+                    result.AppendLine($"✓ Launched: {ip}:{port}");
+                    System.Threading.Thread.Sleep(1000);
+                }
+                catch
+                {
+                    result.AppendLine($"✗ Failed to launch: {ip}:{port}");
+                }
+            }
+
+            result.AppendLine("\n🎮 Check Steam for connection dialogs!");
+            result.AppendLine("One of these attempts might work.");
+
+            ShowMessage(result.ToString(), "Manual Connection Attempts", MessageBoxIcon.Information);
         }
 
         private void ShowConnectionHelp(string ip, int queryPort)
