@@ -55,13 +55,13 @@
             this.Disconnect = new System.Windows.Forms.Button();
             this.CS_Section = new System.Windows.Forms.Label();
             this.Create_INI_File = new System.Windows.Forms.Button();
-            this.btnRestore = new System.Windows.Forms.Button();
             this.Gamma_Input = new System.Windows.Forms.TextBox();
             this.gammaTimer = new System.Windows.Forms.Timer(this.components);
-            this.btnApply = new System.Windows.Forms.Button();
-            this.open_restore_directory = new System.Windows.Forms.Button();
             this.Note_Box = new System.Windows.Forms.TextBox();
             this.server_options = new System.Windows.Forms.Button();
+            this.btnOpenBackupPath = new System.Windows.Forms.Button();
+            this.btnRestoreSkins = new System.Windows.Forms.Button();
+            this.btnDeleteSkins = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // MainLabel
@@ -457,23 +457,6 @@
             this.Create_INI_File.UseVisualStyleBackColor = false;
             this.Create_INI_File.Click += new System.EventHandler(this.Create_INI_File_Click);
             // 
-            // btnRestore
-            // 
-            this.btnRestore.AutoSize = true;
-            this.btnRestore.BackColor = System.Drawing.Color.Transparent;
-            this.btnRestore.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnRestore.Cursor = System.Windows.Forms.Cursors.Cross;
-            this.btnRestore.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnRestore.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRestore.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.btnRestore.Location = new System.Drawing.Point(906, 172);
-            this.btnRestore.Name = "btnRestore";
-            this.btnRestore.Size = new System.Drawing.Size(93, 35);
-            this.btnRestore.TabIndex = 34;
-            this.btnRestore.Text = "Restore";
-            this.btnRestore.UseVisualStyleBackColor = false;
-            this.btnRestore.Click += new System.EventHandler(this.btnRestore_Click);
-            // 
             // Gamma_Input
             // 
             this.Gamma_Input.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -492,40 +475,6 @@
             // gammaTimer
             // 
             this.gammaTimer.Tick += new System.EventHandler(this.gammaTimer_Tick);
-            // 
-            // btnApply
-            // 
-            this.btnApply.AutoSize = true;
-            this.btnApply.BackColor = System.Drawing.Color.Transparent;
-            this.btnApply.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnApply.Cursor = System.Windows.Forms.Cursors.Cross;
-            this.btnApply.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnApply.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.btnApply.Location = new System.Drawing.Point(906, 131);
-            this.btnApply.Name = "btnApply";
-            this.btnApply.Size = new System.Drawing.Size(93, 35);
-            this.btnApply.TabIndex = 35;
-            this.btnApply.Text = "Apply";
-            this.btnApply.UseVisualStyleBackColor = false;
-            this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
-            // 
-            // open_restore_directory
-            // 
-            this.open_restore_directory.AutoSize = true;
-            this.open_restore_directory.BackColor = System.Drawing.Color.Transparent;
-            this.open_restore_directory.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.open_restore_directory.Cursor = System.Windows.Forms.Cursors.Cross;
-            this.open_restore_directory.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.open_restore_directory.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.open_restore_directory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.open_restore_directory.Location = new System.Drawing.Point(906, 213);
-            this.open_restore_directory.Name = "open_restore_directory";
-            this.open_restore_directory.Size = new System.Drawing.Size(93, 35);
-            this.open_restore_directory.TabIndex = 36;
-            this.open_restore_directory.Text = "Backup";
-            this.open_restore_directory.UseVisualStyleBackColor = false;
-            this.open_restore_directory.Click += new System.EventHandler(this.open_restore_directory_Click);
             // 
             // Note_Box
             // 
@@ -555,9 +504,60 @@
             this.server_options.Name = "server_options";
             this.server_options.Size = new System.Drawing.Size(93, 35);
             this.server_options.TabIndex = 38;
-            this.server_options.Text = "Server Manager";
+            this.server_options.Text = "Server";
             this.server_options.UseVisualStyleBackColor = false;
             this.server_options.Click += new System.EventHandler(this.server_options_Click);
+            // 
+            // btnOpenBackupPath
+            // 
+            this.btnOpenBackupPath.AutoSize = true;
+            this.btnOpenBackupPath.BackColor = System.Drawing.Color.Transparent;
+            this.btnOpenBackupPath.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnOpenBackupPath.Cursor = System.Windows.Forms.Cursors.Cross;
+            this.btnOpenBackupPath.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnOpenBackupPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOpenBackupPath.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btnOpenBackupPath.Location = new System.Drawing.Point(906, 213);
+            this.btnOpenBackupPath.Name = "btnOpenBackupPath";
+            this.btnOpenBackupPath.Size = new System.Drawing.Size(93, 35);
+            this.btnOpenBackupPath.TabIndex = 43;
+            this.btnOpenBackupPath.Text = "Backup Path";
+            this.btnOpenBackupPath.UseVisualStyleBackColor = false;
+            this.btnOpenBackupPath.Click += new System.EventHandler(this.btnOpenBackupPath_Click);
+            // 
+            // btnRestoreSkins
+            // 
+            this.btnRestoreSkins.AutoSize = true;
+            this.btnRestoreSkins.BackColor = System.Drawing.Color.Transparent;
+            this.btnRestoreSkins.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnRestoreSkins.Cursor = System.Windows.Forms.Cursors.Cross;
+            this.btnRestoreSkins.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnRestoreSkins.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRestoreSkins.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btnRestoreSkins.Location = new System.Drawing.Point(906, 172);
+            this.btnRestoreSkins.Name = "btnRestoreSkins";
+            this.btnRestoreSkins.Size = new System.Drawing.Size(93, 35);
+            this.btnRestoreSkins.TabIndex = 44;
+            this.btnRestoreSkins.Text = "Restore";
+            this.btnRestoreSkins.UseVisualStyleBackColor = false;
+            this.btnRestoreSkins.Click += new System.EventHandler(this.btnRestoreSkins_Click);
+            // 
+            // btnDeleteSkins
+            // 
+            this.btnDeleteSkins.AutoSize = true;
+            this.btnDeleteSkins.BackColor = System.Drawing.Color.Transparent;
+            this.btnDeleteSkins.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnDeleteSkins.Cursor = System.Windows.Forms.Cursors.Cross;
+            this.btnDeleteSkins.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnDeleteSkins.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDeleteSkins.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.btnDeleteSkins.Location = new System.Drawing.Point(906, 131);
+            this.btnDeleteSkins.Name = "btnDeleteSkins";
+            this.btnDeleteSkins.Size = new System.Drawing.Size(93, 35);
+            this.btnDeleteSkins.TabIndex = 45;
+            this.btnDeleteSkins.Text = "Delete Skins";
+            this.btnDeleteSkins.UseVisualStyleBackColor = false;
+            this.btnDeleteSkins.Click += new System.EventHandler(this.btnDeleteSkins_Click);
             // 
             // ReaperV1
             // 
@@ -567,12 +567,12 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(1054, 401);
+            this.Controls.Add(this.btnDeleteSkins);
+            this.Controls.Add(this.btnRestoreSkins);
+            this.Controls.Add(this.btnOpenBackupPath);
             this.Controls.Add(this.server_options);
             this.Controls.Add(this.Note_Box);
-            this.Controls.Add(this.open_restore_directory);
-            this.Controls.Add(this.btnApply);
             this.Controls.Add(this.Gamma_Input);
-            this.Controls.Add(this.btnRestore);
             this.Controls.Add(this.Create_INI_File);
             this.Controls.Add(this.CS_Section);
             this.Controls.Add(this.Disconnect);
@@ -638,13 +638,13 @@
         private System.Windows.Forms.Button Disconnect;
         private System.Windows.Forms.Label CS_Section;
         private System.Windows.Forms.Button Create_INI_File;
-        private System.Windows.Forms.Button btnRestore;
         private System.Windows.Forms.TextBox Gamma_Input;
         private System.Windows.Forms.Timer gammaTimer;
-        private System.Windows.Forms.Button btnApply;
-        private System.Windows.Forms.Button open_restore_directory;
         private System.Windows.Forms.TextBox Note_Box;
         private System.Windows.Forms.Button server_options;
+        private System.Windows.Forms.Button btnOpenBackupPath;
+        private System.Windows.Forms.Button btnRestoreSkins;
+        private System.Windows.Forms.Button btnDeleteSkins;
     }
 }
 

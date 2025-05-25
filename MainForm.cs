@@ -1,17 +1,16 @@
 ﻿using Microsoft.Win32;
+using ReaperV2;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Media;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 using WMPLib;
-using ReaperV2;
+
 
 
 namespace testrun2
@@ -20,7 +19,6 @@ namespace testrun2
         
     {
         public Point mouseLocation;
-        private string filePath = @"C:\Program Files (x86)\Steam\steamapps\common\ARK\Engine\Config\BaseDeviceProfiles.ini";
         public ReaperV1()
         {
             InitializeComponent();
@@ -662,328 +660,6 @@ namespace testrun2
         }
 
 
-        private void MoveFilesToBackup()
-        {
-            string backupFolder = @"C:\ARK_DELETED_FILES";
-            string arkBasePath = @"C:\Program Files (x86)\Steam\steamapps\common\ARK\ShooterGame\Content\PrimalEarth";
-
-            var fileGroups = GetFileGroups(arkBasePath);
-
-            ProcessFileGroups(fileGroups, backupFolder);
-        }
-
-        private Dictionary<string, string[]> GetFileGroups(string basePath)
-        {
-            return new Dictionary<string, string[]>
-            {
-                // Weapon textures
-                [Path.Combine(basePath, "WeaponHarpoon", "Textures")] = new[]
-                {
-            "T_HarpoonProjectile_Net_N.uasset",
-            "T_HarpoonProjectile_Net_Layered.uasset",
-            "T_HarpoonProjectile_Net_BC.uasset"
-        },
-
-                [Path.Combine(basePath, "WeaponCompoundBow", "Textures")] = new[]
-                {
-            "T_CompoundBow_Colorize_d.uasset",
-            "T_CompoundBow_Colorize_m.uasset",
-            "T_CompoundBow_N.uasset",
-            "T_CompoundBow_Layered.uasset"
-        },
-
-                [Path.Combine(basePath, "WeaponHatchet", "Colorization")] = new[]
-                {
-            "Hatchet_colorize_m.uasset",
-            "Hatchet_colorize_d.uasset"
-        },
-
-                // Tek Gen2 armor
-                [Path.Combine(basePath, "Human", "Male", "Outfits", "TekGen2")] = new[]
-                {
-            "tekGen2_armor_male_shoes.uasset",
-            "tekGen2_armor_male_shirt.uasset",
-            "tekGen2_armor_male_pants.uasset",
-            "tekGen2_armor_male_helmet.uasset",
-            "tekGen2_armor_male_gloves.uasset",
-            "tekGen2_armor_male_FPV.uasset",
-            "Tek_Gen2_Armor_Emissive_Colorize_MIC.uasset",
-            "MM_Tek_Emissive_Colorized_Cyan.uasset",
-            "MIC_TekSuitGen2_Shoes_Colorized.uasset",
-            "MIC_TekSuitGen2_Shirt_Colorized.uasset",
-            "MIC_TekSuitGen2_Shirt.uasset",
-            "MIC_TekSuitGen2_Pants_Colorized.uasset",
-            "MIC_TekSuitGen2_Jetpack_Colorized.uasset",
-            "MIC_TekSuitGen2_Helmet_Colorized.uasset",
-            "MIC_TekSuitGen2_Gloves_Colorized.uasset",
-            "MIC_TekSuitGen2_Emissive.uasset",
-            "MIC_TekSuitGen2_Colorized.uasset"
-        },
-
-                [Path.Combine(basePath, "Human", "Male", "Outfits", "TekGen2", "Textures")] = new[]
-                {
-            "T_Gen2_TekHelmet_bc.uasset",
-            "T_Gen2_TekHelmet_LightMask.uasset",
-            "T_Gen2_TekHelmet_N.uasset",
-            "T_HM_TekSuitGen2_Gloves_FPV_Skin_M.uasset",
-            "T_HM_TekSuitGen2_Gloves_Skin_M.uasset",
-            "T_HM_TekSuitGen2_Helmet_Skin_M.uasset",
-            "T_HM_TekSuitGen2_Pants_Skin_M.uasset",
-            "T_HM_TekSuitGen2_Shoes_Skin_M.uasset",
-            "T_TekSuitGen2_Gloves_Colorized_D.uasset",
-            "T_TekSuitGen2_Gloves_Colorized_M.uasset",
-            "T_TekSuitGen2_Gloves_Layered.uasset",
-            "T_TekSuitGen2_Gloves_N.uasset",
-            "T_TekSuitGen2_Helmet_Colorized_D.uasset",
-            "T_TekSuitGen2_Helmet_Colorized_M.uasset",
-            "T_TekSuitGen2_Helmet_Layered.uasset",
-            "T_TekSuitGen2_Helmet_N.uasset",
-            "T_TekSuitGen2_Jetpack_Colorized_D.uasset",
-            "T_TekSuitGen2_Jetpack_Colorized_M.uasset",
-            "T_TekSuitGen2_Jetpack_Layered.uasset",
-            "T_TekSuitGen2_Jetpack_N.uasset",
-            "T_TekSuitGen2_Pants_Colorized_D.uasset",
-            "T_TekSuitGen2_Pants_Colorized_M.uasset",
-            "T_TekSuitGen2_Pants_Layered.uasset",
-            "T_TekSuitGen2_Pants_N.uasset",
-            "T_TekSuitGen2_Shirt_BC.uasset",
-            "T_TekSuitGen2_Shirt_Colorized_D.uasset",
-            "T_TekSuitGen2_Shirt_Colorized_M.uasset",
-            "T_TekSuitGen2_Shirt_Layered.uasset",
-            "T_TekSuitGen2_Shirt_N.uasset",
-            "T_TekSuitGen2_Shoes_Colorized_M.uasset",
-            "T_TekSuitGen2_Shoes_Layered.uasset",
-            "T_TekSuitGen2_Shoes_N.uasset"
-        },
-
-                // Tek armor
-                [Path.Combine(basePath, "Human", "Male", "Outfits", "Tek")] = new[]
-                {
-            "HUD_Tek_Boots_Colorized_MIC.uasset",
-            "HUD_Tek_Colorized_MIC.uasset",
-            "HUD_Tek_Gloves_Colorized_MIC.uasset",
-            "HUD_Tek_Hat_Colorized_MIC.uasset",
-            "HUD_Tek_Pants_Colorized_MIC.uasset",
-            "HUD_Tek_Shirt_Colorized_MIC.uasset",
-            "MM_Tek_Helmet.uasset",
-            "Tek_Armor_Emissive_Colorize_MIC.uasset",
-            "tek_armor_male_FPV.uasset",
-            "tek_armor_male_gloves.uasset",
-            "tek_armor_male_helmet.uasset",
-            "tek_armor_male_pants.uasset",
-            "tek_armor_male_shirt.uasset",
-            "tek_armor_male_shoes.uasset",
-            "Tek_Colorize_BaseMIC.uasset",
-            "Tek_gloves_Colorize_MIC.uasset",
-            "tek_Gloves_FPV_Colorize_MIC.uasset",
-            "Tek_helmet_Colorize_MIC.uasset",
-            "Tek_HelmetGlass_NEW_MIC.uasset",
-            "Tek_jetpack_Colorize_MIC.uasset",
-            "Tek_pants_Colorize_MIC.uasset",
-            "Tek_shirt_Colorize_MIC.uasset",
-            "Tek_shoes_Colorize_MIC.uasset"
-        },
-
-                [Path.Combine(basePath, "Human", "Male", "Outfits", "Tek", "Textures")] = new[]
-                {
-            "jetpack_Layered.uasset",
-            "jetpack_N.uasset",
-            "T_HexPattern_MNR.uasset",
-            "tek_armor_FPV_Layered.uasset",
-            "tek_armor_FPV_N.uasset",
-            "tek_armor_gloves_Layered.uasset",
-            "tek_armor_gloves_N.uasset",
-            "tek_armor_helmet_G.uasset",
-            "tek_armor_helmet_Layered.uasset",
-            "tek_armor_helmet_N.uasset",
-            "tek_armor_helmetGlass_H.uasset",
-            "tek_armor_helmetGlass_M.uasset",
-            "tek_armor_pants_Layered.uasset",
-            "tek_armor_pants_N.uasset",
-            "tek_armor_shirt_D.uasset",
-            "tek_armor_shirt_Layered.uasset",
-            "tek_armor_shirt_N.uasset",
-            "tek_armor_shoes_Layered.uasset",
-            "tek_armor_shoes_N.uasset",
-            "Tek_Helmet_BC.uasset",
-            "Tek_Helmet_LightingMask.uasset",
-            "Tek_Helmet_N.uasset",
-            "Tek_HelmetGlass_Layered.uasset",
-            "Tek_HelmetGlass_N.uasset",
-            "tek_Male_gloves_FPV_skin_m.uasset",
-            "tek_Male_gloves_skin_m.uasset",
-            "tek_Male_pants_skin_m.uasset",
-            "tek_Male_shirt_skin_m.uasset"
-        },
-
-                // Metal armor
-                [Path.Combine(basePath, "Human", "Male", "Outfits", "Metal")] = new[]
-                {
-            "Male_FPV_Metal_Gloves.uasset",
-            "Male_Metal_Gloves.uasset",
-            "Male_Metal_Hat.uasset",
-            "Male_Metal_Shirt.uasset",
-            "maleMetal_boots.uasset",
-            "maleMetal_Gloves.uasset",
-            "maleMetal_Pants.uasset",
-            "maleMetal_Shirt.uasset"
-        },
-
-                [Path.Combine(basePath, "Human", "Male", "Outfits", "Metal", "Textures")] = new[]
-                {
-            "Male_Metal_Boots_Layered.uasset",
-            "Male_Metal_Boots_N.uasset",
-            "Male_Metal_Boots_skin_m.uasset",
-            "Male_Metal_FPV_Layered.uasset",
-            "Male_Metal_FPV_N.uasset",
-            "Male_Metal_Gloves_D.uasset",
-            "Male_Metal_Gloves_Layered.uasset",
-            "Male_Metal_Gloves_N.uasset",
-            "Male_Metal_Gloves_skin_m.uasset",
-            "Male_Metal_Hat_D.uasset",
-            "Male_Metal_Hat_Layered.uasset",
-            "Male_Metal_Hat_N.uasset",
-            "Male_Metal_Pants_Layered.uasset",
-            "Male_Metal_Pants_N.uasset",
-            "Male_Metal_Pants_skin_m.uasset",
-            "Male_Metal_Shirt_D.uasset",
-            "Male_Metal_Shirt_Layered.uasset",
-            "Male_Metal_Shirt_N.uasset",
-            "Male_Metal_Shirt_skin_m.uasset"
-        },
-
-                // C4 weapon
-                [Path.Combine(basePath, "WeaponC4")] = new[]
-                {
-            "detonator_TPV_RIG_Skeleton.uasset",
-            "detonator_TPV_RIG.uasset",
-            "c4_TPV_RIG_Skeleton.uasset",
-            "c4_TPV_RIG.uasset",
-            "c4_FPV_RIG_Skeleton.uasset",
-            "c4_FPV_RIG.uasset",
-            "C4_FPV_AnimBP.uasset",
-            "C4_explosive.uasset"
-        },
-
-                [Path.Combine(basePath, "WeaponC4", "Textures")] = new[]
-                {
-            "C4Detonator_E.uasset",
-            "C4Detonator_layered.uasset",
-            "C4Detonator_N.uasset",
-            "Explosive_BC.uasset",
-            "Explosive_E.uasset",
-            "Explosive_Layered.uasset",
-            "Explosive_N.uasset"
-        },
-
-                // Crossbow weapon
-                [Path.Combine(basePath, "WeaponCrossbow")] = new[]
-                {
-            "crossbow_FPV_AnimBlueprint.uasset",
-            "crossbow_FPV_RIG.uasset",
-            "crossbow_FPV_RIG_Skeleton.uasset",
-            "crossbow_TPV_AnimBlueprint.uasset",
-            "crossbow_TPV_RIG.uasset",
-            "crossbow_TPV_RIG_Skeleton.uasset",
-            "crossbowArrow.uasset"
-        },
-
-                [Path.Combine(basePath, "WeaponCrossbow", "Textures")] = new[]
-                {
-            "Crossbow_Arrow_Metal_D.uasset",
-            "Crossbow_Arrow_Metal_Layered.uasset",
-            "Crossbow_Arrow_Metal_N.uasset",
-            "Crossbow_Arrow_Sedative_D.uasset",
-            "Crossbow_Arrow_Sedative_Layered.uasset",
-            "Crossbow_Arrow_Sedative_N.uasset",
-            "Crossbow_Arrow_Stone_D.uasset",
-            "Crossbow_Arrow_Stone_Layered.uasset",
-            "Crossbow_Arrow_Stone_N.uasset",
-            "Crossbow_Colorize_d.uasset",
-            "Crossbow_Colorize_m.uasset",
-            "Crossbow_Layered.uasset",
-            "Crossbow_N.uasset",
-            "HUD_ForgedCrossbow_Colorize_d.uasset",
-            "HUD_ForgedCrossbow_Colorize_m.uasset"
-        },
-
-                // Harpoon weapon
-                [Path.Combine(basePath, "WeaponHarpoon")] = new[]
-                {
-            "Arrow_MIC.uasset",
-            "Harpoon_Colorize_MIC.uasset",
-            "harpoon_FPV_AnimBlueprint.uasset",
-            "Harpoon_FPV_RIG.uasset",
-            "Harpoon_FPV_RIG_Skeleton.uasset",
-            "HUD_Harpoon_Colorize_MIC.uasset",
-            "MIC_HarpoonProjectile_Net.uasset",
-            "SK_HarpoonProjectile_Net.uasset",
-            "SM_Harpoon.uasset",
-            "SM_HarpoonAmmo_Net.uasset",
-            "SM_HarpoonProjectile.uasset"
-        }
-            };
-        }
-
-        private void ProcessFileGroups(Dictionary<string, string[]> fileGroups, string backupFolder)
-        {
-            foreach (var group in fileGroups)
-            {
-                string sourceFolder = NormalizePath(group.Key);
-                string[] files = group.Value;
-
-                ProcessFileGroup(sourceFolder, files, backupFolder);
-            }
-        }
-
-        private void ProcessFileGroup(string sourceFolder, string[] files, string backupFolder)
-        {
-            string destinationFolder = Path.Combine(backupFolder, Path.GetFileName(sourceFolder));
-
-            foreach (string file in files)
-            {
-                MoveFileToBackup(sourceFolder, file, destinationFolder);
-            }
-        }
-
-        private void MoveFileToBackup(string sourceFolder, string fileName, string destinationFolder)
-        {
-            string sourceFilePath = Path.Combine(sourceFolder, fileName);
-            string destinationFilePath = Path.Combine(destinationFolder, fileName);
-
-            try
-            {
-                Directory.CreateDirectory(destinationFolder);
-
-                if (!File.Exists(sourceFilePath))
-                {
-                    Console.WriteLine($"File not found: {sourceFilePath}");
-                    return;
-                }
-
-                if (File.Exists(destinationFilePath))
-                {
-                    Console.WriteLine($"File already exists in backup: {destinationFilePath}");
-                    return;
-                }
-
-                File.Move(sourceFilePath, destinationFilePath);
-                Console.WriteLine($"Successfully moved: {sourceFilePath} -> {destinationFilePath}");
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                Console.WriteLine($"Permission error moving file {sourceFilePath}: {ex.Message}");
-            }
-            catch (IOException ex)
-            {
-                Console.WriteLine($"IO error moving file {sourceFilePath}: {ex.Message}");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error moving file {sourceFilePath}: {ex.Message}");
-            }
-        }
-
         private string NormalizePath(string path)
         {
             return Path.GetFullPath(path).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
@@ -993,59 +669,6 @@ namespace testrun2
         {
             string gammaValue = Gamma_Input.Text;
             GammaController.Set_Gamma_Input(gammaValue);
-        }
-
-
-
-        private void btnRestore_Click(object sender, EventArgs e)
-        {
-            string backupFolder = @"C:\ARK_DELETED_FILES";
-            string arkBasePath = GetArkInstallPath();
-
-            if (string.IsNullOrEmpty(arkBasePath))
-            {
-                MessageBox.Show("ARK installation path not found. Please verify ARK is installed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            var fileGroups = GetFileRestoreConfiguration(arkBasePath);
-
-            int successCount = 0;
-            int failureCount = 0;
-            var errors = new List<string>();
-
-            foreach (var group in fileGroups)
-            {
-                string targetFolder = group.Key;
-                string[] files = group.Value;
-
-                foreach (var file in files)
-                {
-                    var result = RestoreFile(backupFolder, targetFolder, file);
-
-                    if (result.Success)
-                    {
-                        successCount++;
-                        Console.WriteLine($"✓ Restored: {file}");
-                    }
-                    else
-                    {
-                        failureCount++;
-                        errors.Add(result.ErrorMessage);
-                        Console.WriteLine($"✗ Failed: {result.ErrorMessage}");
-                    }
-                }
-            }
-
-            // Show summary
-            string summary = $"Restore completed:\n• {successCount} files restored successfully\n• {failureCount} files failed";
-            if (errors.Count > 0)
-            {
-                summary += $"\n\nFirst few errors:\n{string.Join("\n", errors.Take(5))}";
-            }
-
-            MessageBox.Show(summary, "Restore Summary", MessageBoxButtons.OK,
-                failureCount == 0 ? MessageBoxIcon.Information : MessageBoxIcon.Warning);
         }
 
         private string GetArkInstallPath()
@@ -1089,327 +712,9 @@ namespace testrun2
             return null;
         }
 
-        private Dictionary<string, string[]> GetFileRestoreConfiguration(string arkBasePath)
-        {
-            string shooterGamePath = Path.Combine(arkBasePath, "ShooterGame", "Content", "PrimalEarth");
-
-            return new Dictionary<string, string[]>
-    {
-        // Weapon files
-        {
-            Path.Combine(shooterGamePath, "WeaponHarpoon", "Textures"),
-            new[] {
-                "T_HarpoonProjectile_Net_N.uasset",
-                "T_HarpoonProjectile_Net_Layered.uasset",
-                "T_HarpoonProjectile_Net_BC.uasset"
-            }
-        },
-        {
-            Path.Combine(shooterGamePath, "WeaponCompoundBow", "Textures"),
-            new[] {
-                "T_CompoundBow_Colorize_d.uasset",
-                "T_CompoundBow_Colorize_m.uasset",
-                "T_CompoundBow_N.uasset",
-                "T_CompoundBow_Layered.uasset"
-            }
-        },
-        {
-            Path.Combine(shooterGamePath, "WeaponHatchet", "Colorization"),
-            new[] {
-                "Hatchet_colorize_m.uasset",
-                "Hatchet_colorize_d.uasset"
-            }
-        },
-        {
-            Path.Combine(shooterGamePath, "WeaponC4"),
-            new[] {
-                "detonator_TPV_RIG_Skeleton.uasset",
-                "detonator_TPV_RIG.uasset",
-                "c4_TPV_RIG_Skeleton.uasset",
-                "c4_TPV_RIG.uasset",
-                "c4_FPV_RIG_Skeleton.uasset",
-                "c4_FPV_RIG.uasset",
-                "C4_FPV_AnimBP.uasset",
-                "C4_explosive.uasset"
-            }
-        },
-        {
-            Path.Combine(shooterGamePath, "WeaponC4", "Textures"),
-            new[] {
-                "C4Detonator_E.uasset",
-                "C4Detonator_layered.uasset",
-                "C4Detonator_N.uasset",
-                "Explosive_BC.uasset",
-                "Explosive_E.uasset",
-                "Explosive_Layered.uasset",
-                "Explosive_N.uasset"
-            }
-        },
-        {
-            Path.Combine(shooterGamePath, "WeaponCrossbow"),
-            new[] {
-                "crossbow_FPV_AnimBlueprint.uasset",
-                "crossbow_FPV_RIG.uasset",
-                "crossbow_FPV_RIG_Skeleton.uasset",
-                "crossbow_TPV_AnimBlueprint.uasset",
-                "crossbow_TPV_RIG.uasset",
-                "crossbow_TPV_RIG_Skeleton.uasset",
-                "crossbowArrow.uasset"
-            }
-        },
-        {
-            Path.Combine(shooterGamePath, "WeaponCrossbow", "Textures"),
-            new[] {
-                "Crossbow_Arrow_Metal_D.uasset",
-                "Crossbow_Arrow_Metal_Layered.uasset",
-                "Crossbow_Arrow_Metal_N.uasset",
-                "Crossbow_Arrow_Sedative_D.uasset",
-                "Crossbow_Arrow_Sedative_Layered.uasset",
-                "Crossbow_Arrow_Sedative_N.uasset",
-                "Crossbow_Arrow_Stone_D.uasset",
-                "Crossbow_Arrow_Stone_Layered.uasset",
-                "Crossbow_Arrow_Stone_N.uasset",
-                "Crossbow_Colorize_d.uasset",
-                "Crossbow_Colorize_m.uasset",
-                "Crossbow_Layered.uasset",
-                "Crossbow_N.uasset",
-                "HUD_ForgedCrossbow_Colorize_d.uasset",
-                "HUD_ForgedCrossbow_Colorize_m.uasset"
-            }
-        },
-        {
-            Path.Combine(shooterGamePath, "WeaponHarpoon"),
-            new[] {
-                "Arrow_MIC.uasset",
-                "Harpoon_Colorize_MIC.uasset",
-                "harpoon_FPV_AnimBlueprint.uasset",
-                "Harpoon_FPV_RIG.uasset",
-                "Harpoon_FPV_RIG_Skeleton.uasset",
-                "HUD_Harpoon_Colorize_MIC.uasset",
-                "MIC_HarpoonProjectile_Net.uasset",
-                "SK_HarpoonProjectile_Net.uasset",
-                "SM_Harpoon.uasset",
-                "SM_HarpoonAmmo_Net.uasset",
-                "SM_HarpoonProjectile.uasset"
-            }
-        },
-        
-        // Armor files
-        {
-            Path.Combine(shooterGamePath, "Human", "Male", "Outfits", "TekGen2"),
-            new[] {
-                "tekGen2_armor_male_shoes.uasset",
-                "tekGen2_armor_male_shirt.uasset",
-                "tekGen2_armor_male_pants.uasset",
-                "tekGen2_armor_male_helmet.uasset",
-                "tekGen2_armor_male_gloves.uasset",
-                "tekGen2_armor_male_FPV.uasset",
-                "Tek_Gen2_Armor_Emissive_Colorize_MIC.uasset",
-                "MM_Tek_Emissive_Colorized_Cyan.uasset",
-                "MIC_TekSuitGen2_Shoes_Colorized.uasset",
-                "MIC_TekSuitGen2_Shirt_Colorized.uasset",
-                "MIC_TekSuitGen2_Shirt.uasset",
-                "MIC_TekSuitGen2_Pants_Colorized.uasset",
-                "MIC_TekSuitGen2_Jetpack_Colorized.uasset",
-                "MIC_TekSuitGen2_Helmet_Colorized.uasset",
-                "MIC_TekSuitGen2_Gloves_Colorized.uasset",
-                "MIC_TekSuitGen2_Emissive.uasset",
-                "MIC_TekSuitGen2_Colorized.uasset"
-            }
-        },
-        {
-            Path.Combine(shooterGamePath, "Human", "Male", "Outfits", "TekGen2", "Textures"),
-            new[] {
-                "T_Gen2_TekHelmet_bc.uasset",
-                "T_Gen2_TekHelmet_LightMask.uasset",
-                "T_Gen2_TekHelmet_N.uasset",
-                "T_HM_TekSuitGen2_Gloves_FPV_Skin_M.uasset",
-                "T_HM_TekSuitGen2_Gloves_Skin_M.uasset",
-                "T_HM_TekSuitGen2_Helmet_Skin_M.uasset",
-                "T_HM_TekSuitGen2_Pants_Skin_M.uasset",
-                "T_HM_TekSuitGen2_Shoes_Skin_M.uasset",
-                "T_TekSuitGen2_Gloves_Colorized_D.uasset",
-                "T_TekSuitGen2_Gloves_Colorized_M.uasset",
-                "T_TekSuitGen2_Gloves_Layered.uasset",
-                "T_TekSuitGen2_Gloves_N.uasset",
-                "T_TekSuitGen2_Helmet_Colorized_D.uasset",
-                "T_TekSuitGen2_Helmet_Colorized_M.uasset",
-                "T_TekSuitGen2_Helmet_Layered.uasset",
-                "T_TekSuitGen2_Helmet_N.uasset",
-                "T_TekSuitGen2_Jetpack_Colorized_D.uasset",
-                "T_TekSuitGen2_Jetpack_Colorized_M.uasset",
-                "T_TekSuitGen2_Jetpack_Layered.uasset",
-                "T_TekSuitGen2_Jetpack_N.uasset",
-                "T_TekSuitGen2_Pants_Colorized_D.uasset",
-                "T_TekSuitGen2_Pants_Colorized_M.uasset",
-                "T_TekSuitGen2_Pants_Layered.uasset",
-                "T_TekSuitGen2_Pants_N.uasset",
-                "T_TekSuitGen2_Shirt_BC.uasset",
-                "T_TekSuitGen2_Shirt_Colorized_D.uasset",
-                "T_TekSuitGen2_Shirt_Colorized_M.uasset",
-                "T_TekSuitGen2_Shirt_Layered.uasset",
-                "T_TekSuitGen2_Shirt_N.uasset",
-                "T_TekSuitGen2_Shoes_Colorized_M.uasset",
-                "T_TekSuitGen2_Shoes_Layered.uasset",
-                "T_TekSuitGen2_Shoes_N.uasset"
-            }
-        },
-        {
-            Path.Combine(shooterGamePath, "Human", "Male", "Outfits", "Tek"),
-            new[] {
-                "HUD_Tek_Boots_Colorized_MIC.uasset",
-                "HUD_Tek_Colorized_MIC.uasset",
-                "HUD_Tek_Gloves_Colorized_MIC.uasset",
-                "HUD_Tek_Hat_Colorized_MIC.uasset",
-                "HUD_Tek_Pants_Colorized_MIC.uasset",
-                "HUD_Tek_Shirt_Colorized_MIC.uasset",
-                "MM_Tek_Helmet.uasset",
-                "Tek_Armor_Emissive_Colorize_MIC.uasset",
-                "tek_armor_male_FPV.uasset",
-                "tek_armor_male_gloves.uasset",
-                "tek_armor_male_helmet.uasset",
-                "tek_armor_male_pants.uasset",
-                "tek_armor_male_shirt.uasset",
-                "tek_armor_male_shoes.uasset",
-                "Tek_Colorize_BaseMIC.uasset",
-                "Tek_gloves_Colorize_MIC.uasset",
-                "tek_Gloves_FPV_Colorize_MIC.uasset",
-                "Tek_helmet_Colorize_MIC.uasset",
-                "Tek_HelmetGlass_NEW_MIC.uasset",
-                "Tek_jetpack_Colorize_MIC.uasset",
-                "Tek_pants_Colorize_MIC.uasset",
-                "Tek_shirt_Colorize_MIC.uasset",
-                "Tek_shoes_Colorize_MIC.uasset"
-            }
-        },
-        {
-            Path.Combine(shooterGamePath, "Human", "Male", "Outfits", "Tek", "Textures"),
-            new[] {
-                "jetpack_Layered.uasset",
-                "jetpack_N.uasset",
-                "T_HexPattern_MNR.uasset",
-                "tek_armor_FPV_Layered.uasset",
-                "tek_armor_FPV_N.uasset",
-                "tek_armor_gloves_Layered.uasset",
-                "tek_armor_gloves_N.uasset",
-                "tek_armor_helmet_G.uasset",
-                "tek_armor_helmet_Layered.uasset",
-                "tek_armor_helmet_N.uasset",
-                "tek_armor_helmetGlass_H.uasset",
-                "tek_armor_helmetGlass_M.uasset",
-                "tek_armor_pants_Layered.uasset",
-                "tek_armor_pants_N.uasset",
-                "tek_armor_shirt_D.uasset",
-                "tek_armor_shirt_Layered.uasset",
-                "tek_armor_shirt_N.uasset",
-                "tek_armor_shoes_Layered.uasset",
-                "tek_armor_shoes_N.uasset",
-                "Tek_Helmet_BC.uasset",
-                "Tek_Helmet_LightingMask.uasset",
-                "Tek_Helmet_N.uasset",
-                "Tek_HelmetGlass_Layered.uasset",
-                "Tek_HelmetGlass_N.uasset",
-                "tek_Male_gloves_FPV_skin_m.uasset",
-                "tek_Male_gloves_skin_m.uasset",
-                "tek_Male_pants_skin_m.uasset",
-                "tek_Male_shirt_skin_m.uasset"
-            }
-        },
-        {
-            Path.Combine(shooterGamePath, "Human", "Male", "Outfits", "Metal"),
-            new[] {
-                "Male_FPV_Metal_Gloves.uasset",
-                "Male_Metal_Gloves.uasset",
-                "Male_Metal_Hat.uasset",
-                "Male_Metal_Shirt.uasset",
-                "maleMetal_boots.uasset",
-                "maleMetal_Gloves.uasset",
-                "maleMetal_Pants.uasset",
-                "maleMetal_Shirt.uasset"
-            }
-        },
-        {
-            Path.Combine(shooterGamePath, "Human", "Male", "Outfits", "Metal", "Textures"),
-            new[] {
-                "Male_Metal_Boots_Layered.uasset",
-                "Male_Metal_Boots_N.uasset",
-                "Male_Metal_Boots_skin_m.uasset",
-                "Male_Metal_FPV_Layered.uasset",
-                "Male_Metal_FPV_N.uasset",
-                "Male_Metal_Gloves_D.uasset",
-                "Male_Metal_Gloves_Layered.uasset",
-                "Male_Metal_Gloves_N.uasset",
-                "Male_Metal_Gloves_skin_m.uasset",
-                "Male_Metal_Hat_D.uasset",
-                "Male_Metal_Hat_Layered.uasset",
-                "Male_Metal_Hat_N.uasset",
-                "Male_Metal_Pants_Layered.uasset",
-                "Male_Metal_Pants_N.uasset",
-                "Male_Metal_Pants_skin_m.uasset",
-                "Male_Metal_Shirt_D.uasset",
-                "Male_Metal_Shirt_Layered.uasset",
-                "Male_Metal_Shirt_N.uasset",
-                "Male_Metal_Shirt_skin_m.uasset"
-            }
-        }
-    };
-        }
-
-        private (bool Success, string ErrorMessage) RestoreFile(string backupFolder, string targetFolder, string fileName)
-        {
-            try
-            {
-                // Create target directory if it doesn't exist
-                Directory.CreateDirectory(targetFolder);
-
-                // Build file paths
-                string backupFilePath = Path.Combine(backupFolder, Path.GetFileName(targetFolder), fileName);
-                string targetFilePath = Path.Combine(targetFolder, fileName);
-
-                if (!File.Exists(backupFilePath))
-                {
-                    return (false, $"Backup file not found: {fileName}");
-                }
-
-                // Move file from backup to target location
-                File.Move(backupFilePath, targetFilePath);
-                return (true, null);
-            }
-            catch (UnauthorizedAccessException)
-            {
-                return (false, $"Access denied for {fileName} - Run as Administrator");
-            }
-            catch (IOException ex)
-            {
-                return (false, $"IO error for {fileName}: {ex.Message}");
-            }
-            catch (Exception ex)
-            {
-                return (false, $"Error restoring {fileName}: {ex.Message}");
-            }
-        }
-
-
         private void gammaTimer_Tick(object sender, EventArgs e)
         {
 
-        }
-
-        private void btnApply_Click(object sender, EventArgs e)
-        {
-            MoveFilesToBackup();
-        }
-
-        private void open_restore_directory_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Process.Start("C:\\ARK_DELETED_FILES");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error occurred: " + ex.Message);
-            }
         }
 
         private void Game_Section_Click(object sender, EventArgs e)
@@ -1457,37 +762,69 @@ namespace testrun2
         {
 
         }
-    }
-}
 
-public class FileDeleter
-{
-    public static void DeleteFiles(string[] filePaths)
-    {
-        foreach (string filePath in filePaths)
+        private void btnDeleteSkins_Click(object sender, EventArgs e)
         {
             try
             {
-                if (File.Exists(filePath))
+                string arkBasePath = GetArkInstallPath();
+                if (string.IsNullOrEmpty(arkBasePath) || !Directory.Exists(arkBasePath))
                 {
-                    File.Delete(filePath);
-                    Console.WriteLine("Deleted file: " + filePath);
+                    MessageBox.Show("ARK installation path not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
-                else
+
+                string shooterGamePath = Path.Combine(arkBasePath, "ShooterGame", "Content", "PrimalEarth");
+                int deletedCount = 0;
+
+                // Define files to delete
+                var filesToDelete = new Dictionary<string, string[]>
+        {
+            { Path.Combine(shooterGamePath, "WeaponHarpoon", "Textures"), new[] {
+                "T_HarpoonProjectile_Net_N.uasset",
+                "T_HarpoonProjectile_Net_Layered.uasset",
+                "T_HarpoonProjectile_Net_BC.uasset"
+            }},
+            { Path.Combine(shooterGamePath, "WeaponCompoundBow", "Textures"), new[] {
+                "T_CompoundBow_Colorize_d.uasset",
+                "T_CompoundBow_Colorize_m.uasset",
+                "T_CompoundBow_N.uasset",
+                "T_CompoundBow_Layered.uasset"
+            }},
+            { Path.Combine(shooterGamePath, "WeaponHatchet", "Colorization"), new[] {
+                "Hatchet_colorize_m.uasset",
+                "Hatchet_colorize_d.uasset"
+            }}
+        };
+
+                foreach (var folder in filesToDelete)
                 {
-                    Console.WriteLine("File not found: " + filePath);
+                    string folderPath = folder.Key;
+                    if (!Directory.Exists(folderPath))
+                        continue;
+
+                    foreach (string fileName in folder.Value)
+                    {
+                        string filePath = Path.Combine(folderPath, fileName);
+                        if (File.Exists(filePath))
+                        {
+                            File.Delete(filePath);
+                            deletedCount++;
+                        }
+                    }
                 }
+
+                MessageBox.Show($"Successfully deleted {deletedCount} skin files.\nSkins will now appear black/bugged in-game.",
+                               "Skins Deleted", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error deleting file: " + filePath + "\n" + ex.Message);
+                MessageBox.Show($"Error deleting skin files: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-    }
-}
 
 
-public class ArkSurvivalEvolvedReconnector
+        public class ArkSurvivalEvolvedReconnector
 {
     private const int SW_RESTORE = 9;
     private const uint KEYEVENTF_KEYUP = 0x0002;
@@ -1762,3 +1099,132 @@ public class GammaController
         }
     }
 }
+
+        private void btnRestoreSkins_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string arkBasePath = GetArkInstallPath();
+                if (string.IsNullOrEmpty(arkBasePath) || !Directory.Exists(arkBasePath))
+                {
+                    MessageBox.Show("ARK installation path not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                string backupPath = GetBackupPath();
+                if (string.IsNullOrEmpty(backupPath) || !Directory.Exists(backupPath))
+                {
+                    MessageBox.Show("Backup folder not found! Please ensure backup exists.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                string shooterGamePath = Path.Combine(arkBasePath, "ShooterGame", "Content", "PrimalEarth");
+                int restoredCount = 0;
+
+                // Define files to restore
+                var filesToRestore = new Dictionary<string, string[]>
+        {
+            { Path.Combine(shooterGamePath, "WeaponHarpoon", "Textures"), new[] {
+                "T_HarpoonProjectile_Net_N.uasset",
+                "T_HarpoonProjectile_Net_Layered.uasset",
+                "T_HarpoonProjectile_Net_BC.uasset"
+            }},
+            { Path.Combine(shooterGamePath, "WeaponCompoundBow", "Textures"), new[] {
+                "T_CompoundBow_Colorize_d.uasset",
+                "T_CompoundBow_Colorize_m.uasset",
+                "T_CompoundBow_N.uasset",
+                "T_CompoundBow_Layered.uasset"
+            }},
+            { Path.Combine(shooterGamePath, "WeaponHatchet", "Colorization"), new[] {
+                "Hatchet_colorize_m.uasset",
+                "Hatchet_colorize_d.uasset"
+            }}
+        };
+
+                foreach (var folder in filesToRestore)
+                {
+                    string targetFolderPath = folder.Key;
+
+                    // Create directory if it doesn't exist
+                    if (!Directory.Exists(targetFolderPath))
+                        Directory.CreateDirectory(targetFolderPath);
+
+                    foreach (string fileName in folder.Value)
+                    {
+                        // Find backup file
+                        string backupFilePath = FindBackupFile(backupPath, fileName);
+                        if (!string.IsNullOrEmpty(backupFilePath))
+                        {
+                            string targetFilePath = Path.Combine(targetFolderPath, fileName);
+                            File.Copy(backupFilePath, targetFilePath, true);
+                            restoredCount++;
+                        }
+                    }
+                }
+
+                MessageBox.Show($"Successfully restored {restoredCount} skin files from backup.",
+                               "Skins Restored", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error restoring skin files: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+        private void btnOpenBackupPath_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string backupPath = GetBackupPath();
+
+                if (string.IsNullOrEmpty(backupPath))
+                {
+                    MessageBox.Show("Backup path not configured.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                if (!Directory.Exists(backupPath))
+                {
+                    DialogResult result = MessageBox.Show($"Backup folder doesn't exist at:\n{backupPath}\n\nWould you like to create it?",
+                                                         "Backup Folder Not Found", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
+                    {
+                        Directory.CreateDirectory(backupPath);
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+
+                // Open the folder in Windows Explorer
+                Process.Start("explorer.exe", backupPath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error opening backup path: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Helper method to get backup path
+        private string GetBackupPath()
+        {
+            // Store backup on user's desktop
+            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            return Path.Combine(desktopPath, "ARKBackups");
+        }
+
+        // Helper method to find backup files recursively
+        private string FindBackupFile(string backupPath, string fileName)
+        {
+            if (!Directory.Exists(backupPath))
+                return null;
+
+            // Search for the file recursively in backup folder
+            string[] foundFiles = Directory.GetFiles(backupPath, fileName, SearchOption.AllDirectories);
+            return foundFiles.Length > 0 ? foundFiles[0] : null;
+        }
+    }
+}
+    
