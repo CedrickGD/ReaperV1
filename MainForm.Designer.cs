@@ -319,7 +319,7 @@
             this.Launch_Game.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.Launch_Game.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Launch_Game.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.Launch_Game.Location = new System.Drawing.Point(795, 172);
+            this.Launch_Game.Location = new System.Drawing.Point(795, 131);
             this.Launch_Game.Name = "Launch_Game";
             this.Launch_Game.Size = new System.Drawing.Size(93, 35);
             this.Launch_Game.TabIndex = 20;
@@ -500,7 +500,7 @@
             this.server_options.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.server_options.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.server_options.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.server_options.Location = new System.Drawing.Point(795, 131);
+            this.server_options.Location = new System.Drawing.Point(795, 172);
             this.server_options.Name = "server_options";
             this.server_options.Size = new System.Drawing.Size(93, 35);
             this.server_options.TabIndex = 38;

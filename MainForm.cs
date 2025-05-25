@@ -849,6 +849,44 @@ namespace testrun2
                   "T_CompoundBow_Colorize_m.uasset",
                   "T_CompoundBow_Layered.uasset",
                   "T_CompoundBow_N.uasset"
+            } },
+            { Path.Combine(shooterGamePath, "TekTier", "tek_rex_saddle"), new[] {
+                  "tek_rex_saddle_Colorize_d.uasset",
+                  "tek_rex_saddle_Colorize_m.uasset",
+                  "tek_rex_saddle_Layered.uasset",
+                  "tek_rex_saddle_N.uasset"
+            } },
+            { Path.Combine(shooterGamePath, "WeaponSpyglass", "Textures"), new[] {
+                  "T_Spyglass_D.uasset",
+                  "T_Spyglass_Layered.uasset",
+                  "T_Spyglass_N.uasset"
+            } },
+            { Path.Combine(shooterGamePath, "WeaponMetalSpear", "Pitchfork"), new[] {
+                   "T_Pitchfork_Colorize_d.uasset",
+                   "T_Pitchfork_Layered.uasset",
+                   "T_Pitchfork_M.uasset",
+                   "T_Pitchfork_N.uasset"
+            } },
+            { Path.Combine(shooterGamePath, "WeaponMetalSpear"), new[] {
+                   "T_MetalSpear_Colorize_d.uasset",
+                   "T_MetalSpear_Layered.uasset",
+                   "T_MetalSpear_M.uasset",
+                   "T_MetalSpear_N.uasset"
+            } },
+            { Path.Combine(shooterGamePath, "WeaponCrossbow", "Textures"), new[] {
+                   "Crossbow_Arrow_Metal_D.uasset",
+                   "Crossbow_Arrow_Metal_Layered.uasset",
+                   "Crossbow_Arrow_Metal_N.uasset",
+                   "Crossbow_Arrow_Sedative_D.uasset",
+                   "Crossbow_Arrow_Sedative_Layered.uasset",
+                   "Crossbow_Arrow_Sedative_N.uasset",
+                   "Crossbow_Arrow_Stone_D.uasset",
+                   "Crossbow_Arrow_Stone_Layered.uasset",
+                   "Crossbow_Arrow_Stone_N.uasset",
+                   "Crossbow_Colorize_d.uasset",
+                   "Crossbow_Colorize_m.uasset",
+                   "Crossbow_Layered.uasset",
+                   "Crossbow_N.uasset"
             } }
         };
 
