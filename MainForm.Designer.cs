@@ -140,9 +140,9 @@
             this.Canvas_Section.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(224)))), ((int)(((byte)(76)))));
             this.Canvas_Section.Location = new System.Drawing.Point(659, 94);
             this.Canvas_Section.Name = "Canvas_Section";
-            this.Canvas_Section.Size = new System.Drawing.Size(85, 25);
+            this.Canvas_Section.Size = new System.Drawing.Size(101, 25);
             this.Canvas_Section.TabIndex = 8;
-            this.Canvas_Section.Text = "Canvas";
+            this.Canvas_Section.Text = "Paintings";
             this.Canvas_Section.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.Canvas_Section.Click += new System.EventHandler(this.Canvas_Section_Click);
             // 
@@ -319,7 +319,7 @@
             this.Launch_Game.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.Launch_Game.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Launch_Game.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.Launch_Game.Location = new System.Drawing.Point(795, 131);
+            this.Launch_Game.Location = new System.Drawing.Point(795, 172);
             this.Launch_Game.Name = "Launch_Game";
             this.Launch_Game.Size = new System.Drawing.Size(93, 35);
             this.Launch_Game.TabIndex = 20;
@@ -336,7 +336,7 @@
             this.Close_Game.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.Close_Game.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Close_Game.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.Close_Game.Location = new System.Drawing.Point(795, 172);
+            this.Close_Game.Location = new System.Drawing.Point(795, 213);
             this.Close_Game.Name = "Close_Game";
             this.Close_Game.Size = new System.Drawing.Size(93, 35);
             this.Close_Game.TabIndex = 21;
@@ -357,7 +357,7 @@
             this.Open_CV_Folder.Name = "Open_CV_Folder";
             this.Open_CV_Folder.Size = new System.Drawing.Size(108, 35);
             this.Open_CV_Folder.TabIndex = 22;
-            this.Open_CV_Folder.Text = "Open Canvas";
+            this.Open_CV_Folder.Text = "Open Directory";
             this.Open_CV_Folder.UseVisualStyleBackColor = false;
             this.Open_CV_Folder.Click += new System.EventHandler(this.Open_CV_Folder_Click);
             // 
@@ -374,7 +374,7 @@
             this.Canvas_Browser.Name = "Canvas_Browser";
             this.Canvas_Browser.Size = new System.Drawing.Size(109, 35);
             this.Canvas_Browser.TabIndex = 23;
-            this.Canvas_Browser.Text = "Basic Canvas";
+            this.Canvas_Browser.Text = "Templates";
             this.Canvas_Browser.UseVisualStyleBackColor = false;
             this.Canvas_Browser.Click += new System.EventHandler(this.Canvas_Browser_Click);
             // 
@@ -523,7 +523,7 @@
             this.open_restore_directory.Name = "open_restore_directory";
             this.open_restore_directory.Size = new System.Drawing.Size(93, 35);
             this.open_restore_directory.TabIndex = 36;
-            this.open_restore_directory.Text = "Backup Path";
+            this.open_restore_directory.Text = "Backup";
             this.open_restore_directory.UseVisualStyleBackColor = false;
             this.open_restore_directory.Click += new System.EventHandler(this.open_restore_directory_Click);
             // 
@@ -551,11 +551,11 @@
             this.server_options.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.server_options.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.server_options.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.server_options.Location = new System.Drawing.Point(795, 213);
+            this.server_options.Location = new System.Drawing.Point(795, 131);
             this.server_options.Name = "server_options";
             this.server_options.Size = new System.Drawing.Size(93, 35);
             this.server_options.TabIndex = 38;
-            this.server_options.Text = "Server Settings";
+            this.server_options.Text = "Server Manager";
             this.server_options.UseVisualStyleBackColor = false;
             this.server_options.Click += new System.EventHandler(this.server_options_Click);
             // 

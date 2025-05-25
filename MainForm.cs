@@ -24,8 +24,6 @@ namespace testrun2
         public ReaperV1()
         {
             InitializeComponent();
-            // In your main form constructor or form load event:
-            server_options.Click += server_options_Click;
         }
 
         private void ReaperV1_Load(object sender, EventArgs e)
