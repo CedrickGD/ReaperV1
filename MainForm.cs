@@ -777,24 +777,79 @@ namespace testrun2
                 string shooterGamePath = Path.Combine(arkBasePath, "ShooterGame", "Content", "PrimalEarth");
                 int deletedCount = 0;
 
-                // Define files to delete
+                // Define files to delete 
                 var filesToDelete = new Dictionary<string, string[]>
-        {
+            {
             { Path.Combine(shooterGamePath, "WeaponHarpoon", "Textures"), new[] {
-                "T_HarpoonProjectile_Net_N.uasset",
-                "T_HarpoonProjectile_Net_Layered.uasset",
-                "T_HarpoonProjectile_Net_BC.uasset"
+                  "T_HarpoonProjectile_Net_N.uasset",
+                  "T_HarpoonProjectile_Net_Layered.uasset",
+                  "T_HarpoonProjectile_Net_BC.uasset",
+                  "T_Harpoon_N.uasset",
+                  "T_Harpoon_Layered.uasset",
+                  "T_Arrow_N.uasset",
+                  "T_Arrow_layered.uasset",
+                  "T_Arrow_D.uasset"
             }},
+            { Path.Combine(shooterGamePath, "WeaponHarpoon"), new[] {
+                  "SK_HarpoonProjectile_Net.uasset",
+                  "SM_Harpoon.uasset",
+                  "SM_HarpoonAmmo_Net.uasset",
+                  "SM_HarpoonProjectile.uasset"
+            } },
+            { Path.Combine(shooterGamePath, "WeaponTekRifle"), new[] {
+                  "M_ScopeOverlay.uasset",
+                  "M_ScopeOverlay_Inst.uasset",
+                  "MF_TekRifle_Lens.uasset"
+            } },
+            { Path.Combine(shooterGamePath, "WeaponTekRifle", "Textures)"), new[] {
+                  "T_TekRifle_Colorize_d.uasset",
+                  "T_TekRifle_Colorize_m.uasset",
+                  "T_TekRifle_Layered.uasset",
+                  "T_TekRifle_N.uasset",
+                  "T_TekRifle_Scope_Colorize_d.uasset",
+                  "T_TekRifle_Scope_Colorize_m.uasset",
+                  "T_TekRifle_Scope_Layered.uasset",
+                  "T_TekRifle_Scope_N.uasset",
+            } },
+            { Path.Combine(shooterGamePath, "WeaponShieldMetal"), new[] {
+                  "T_MetalShield_Colorize_d.uasset",
+                  "T_MetalShield_Colorize_m.uasset",
+                  "T_MetalShield_Layered.uasset",
+                  "T_MetalShield_N.uasset"
+            } },
+            { Path.Combine(shooterGamePath, "WeaponMetalPick"), new[] {
+                  "T_MetalPick_layered.uasset",
+                  "T_MetalPick_Normal_.uasset",
+                  "MetalPick_colorize_d.uasset",
+                  "MetalPick_colorize_m.uasset"
+            } },
+            { Path.Combine(shooterGamePath, "WeaponMachinedShotgun"), new[] {
+                  "T_shotgun_FP_Layered.uasset",
+                  "T_shotgun_FP_N.uasset",
+                  "T_shotgunMachined_Colorize_d.uasset",
+                  "T_shotgunMachined_Colorize_m.uasset"
+            } },
+            { Path.Combine(shooterGamePath, "WeaponMachinedSniper"), new[] {
+                  "T_SniperRifle_Colorize_d.uasset",
+                  "T_SniperRifle_Colorize_m.uasset",
+                  "T_SniperRifle_D.uasset",
+                  "T_SniperRifle_Layered.uasset",
+                  "T_SniperRifle_N.uasset",
+                  "T_SniperScope_Colorize_d.uasset",
+                  "T_SniperScope_Colorize_m.uasset",
+                  "T_SniperScope_Layered.uasset",
+                  "T_SniperScope_N.uasset"
+            } },
+            { Path.Combine(shooterGamePath, "WeaponHatchet"), new[] {
+                  "Hatchet_normal.uasset",
+                  "Hatchet_Material.uasset"
+            } },
             { Path.Combine(shooterGamePath, "WeaponCompoundBow", "Textures"), new[] {
-                "T_CompoundBow_Colorize_d.uasset",
-                "T_CompoundBow_Colorize_m.uasset",
-                "T_CompoundBow_N.uasset",
-                "T_CompoundBow_Layered.uasset"
-            }},
-            { Path.Combine(shooterGamePath, "WeaponHatchet", "Colorization"), new[] {
-                "Hatchet_colorize_m.uasset",
-                "Hatchet_colorize_d.uasset"
-            }}
+                  "T_CompoundBow_Colorize_d.uasset",
+                  "T_CompoundBow_Colorize_m.uasset",
+                  "T_CompoundBow_Layered.uasset",
+                  "T_CompoundBow_N.uasset"
+            } }
         };
 
                 foreach (var folder in filesToDelete)
@@ -814,7 +869,7 @@ namespace testrun2
                     }
                 }
 
-                MessageBox.Show($"Successfully deleted {deletedCount} skin files.\nSkins will now appear black/bugged in-game.",
+                MessageBox.Show($"Successfully deleted {deletedCount} texture files",
                                "Skins Deleted", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -1124,20 +1179,10 @@ public class GammaController
                 // Define files to restore
                 var filesToRestore = new Dictionary<string, string[]>
         {
-            { Path.Combine(shooterGamePath, "WeaponHarpoon", "Textures"), new[] {
-                "T_HarpoonProjectile_Net_N.uasset",
-                "T_HarpoonProjectile_Net_Layered.uasset",
-                "T_HarpoonProjectile_Net_BC.uasset"
-            }},
-            { Path.Combine(shooterGamePath, "WeaponCompoundBow", "Textures"), new[] {
-                "T_CompoundBow_Colorize_d.uasset",
-                "T_CompoundBow_Colorize_m.uasset",
-                "T_CompoundBow_N.uasset",
-                "T_CompoundBow_Layered.uasset"
-            }},
-            { Path.Combine(shooterGamePath, "WeaponHatchet", "Colorization"), new[] {
-                "Hatchet_colorize_m.uasset",
-                "Hatchet_colorize_d.uasset"
+                    // SM & M Files are 3D models, T_ files are textures only these 
+              { Path.Combine(shooterGamePath, "WeaponBola"), new[] {
+                "SM_Bola_thrown.uasset",
+                "SM_Bola_wrapped.uasset"
             }}
         };
 

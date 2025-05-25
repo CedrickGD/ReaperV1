@@ -534,7 +534,7 @@
             this.btnRestoreSkins.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnRestoreSkins.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRestoreSkins.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.btnRestoreSkins.Location = new System.Drawing.Point(906, 172);
+            this.btnRestoreSkins.Location = new System.Drawing.Point(908, 172);
             this.btnRestoreSkins.Name = "btnRestoreSkins";
             this.btnRestoreSkins.Size = new System.Drawing.Size(93, 35);
             this.btnRestoreSkins.TabIndex = 44;
