@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Media;
@@ -10,7 +11,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 using WMPLib;
-
+using ReaperV2;
 
 
 namespace testrun2
@@ -23,6 +24,8 @@ namespace testrun2
         public ReaperV1()
         {
             InitializeComponent();
+            // In your main form constructor or form load event:
+            server_options.Click += server_options_Click;
         }
 
         private void ReaperV1_Load(object sender, EventArgs e)
@@ -996,7 +999,7 @@ namespace testrun2
 
 
 
-        private void SkinRestore_Click(object sender, EventArgs e)
+        private void btnRestore_Click(object sender, EventArgs e)
         {
             string backupFolder = @"C:\ARK_DELETED_FILES";
             string arkBasePath = GetArkInstallPath();
@@ -1394,7 +1397,7 @@ namespace testrun2
 
         }
 
-        private void btnBackup_Click(object sender, EventArgs e)
+        private void btnApply_Click(object sender, EventArgs e)
         {
             MoveFilesToBackup();
         }
@@ -1417,6 +1420,42 @@ namespace testrun2
         }
 
         private void Note_Box_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void server_options_Click(object sender, EventArgs e)
+        {
+            ArkServerManager arkForm = new ArkServerManager();
+            arkForm.Show();
+        }
+
+        private void Canvas_Section_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CS_Section_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TabOptions_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Current_Section_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void INI_Section_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MainLabel_Click(object sender, EventArgs e)
         {
 
         }
@@ -1550,36 +1589,178 @@ public class GammaController
 
     [DllImport("user32.dll")]
     private static extern bool SetForegroundWindow(IntPtr hWnd);
-
     [DllImport("user32.dll")]
     private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
-
     [DllImport("user32.dll")]
     private static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, UIntPtr dwExtraInfo);
-
     [DllImport("user32.dll")]
     private static extern IntPtr GetForegroundWindow();
 
+    /// <summary>
+    /// Validates and sets gamma value for ShooterGame (original method name for compatibility)
+    /// </summary>
+    /// <param name="gammaValue">Gamma value as string (0-10, decimals allowed)</param>
     public static void Set_Gamma_Input(string gammaValue)
     {
-        Process[] processes = Process.GetProcessesByName("ShooterGame");
+        // Validate input first
+        if (!IsValidGammaValue(gammaValue, out float validatedValue))
+        {
+            MessageBox.Show($"Invalid gamma value!\nPlease enter a number between 0 and 10.\nExamples: 2.5, 3,7, 5, 0.8",
+                          "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return;
+        }
 
-        if (processes.Length > 0)
+        // Check if game is running
+        Process[] processes = Process.GetProcessesByName("ShooterGame");
+        if (processes.Length == 0)
+        {
+            MessageBox.Show("ShooterGame is not running!\nPlease start the game first.",
+                          "Game Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return;
+        }
+
+        try
         {
             IntPtr gameWindowHandle = processes[0].MainWindowHandle;
 
+            // Bring game window to foreground
             ShowWindow(gameWindowHandle, SW_RESTORE);
             SetForegroundWindow(gameWindowHandle);
-
             Thread.Sleep(500);
 
+            // Open console with Tab key
             keybd_event((byte)VK_TAB, 0, 0, UIntPtr.Zero);
             keybd_event((byte)VK_TAB, 0, KEYEVENTF_KEYUP, UIntPtr.Zero);
-
             Thread.Sleep(200);
 
-            SendKeys.SendWait("gamma " + gammaValue);
+            // Send gamma command with validated value
+            // Use dot as decimal separator for game console
+            string formattedValue = validatedValue.ToString("F2", CultureInfo.InvariantCulture);
+            SendKeys.SendWait($"gamma {formattedValue}");
             SendKeys.SendWait("{ENTER}");
+
+            // Optional: Show success message
+            // MessageBox.Show($"Gamma set to {formattedValue}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Failed to set gamma value.\nError: {ex.Message}",
+                          "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+    }
+
+    /// <summary>
+    /// Alternative method with return value for more control
+    /// </summary>
+    /// <param name="gammaInput">Gamma value as string (0-10, decimals allowed)</param>
+    /// <returns>True if successful, false if validation failed or game not found</returns>
+    public static bool SetGammaValue(string gammaInput)
+    {
+        // Validate input
+        if (!IsValidGammaValue(gammaInput, out float gammaValue))
+        {
+            return false;
+        }
+
+        // Find the game process
+        Process[] processes = Process.GetProcessesByName("ShooterGame");
+        if (processes.Length == 0)
+        {
+            return false; // Game not running
+        }
+
+        try
+        {
+            IntPtr gameWindowHandle = processes[0].MainWindowHandle;
+
+            // Bring game window to foreground
+            ShowWindow(gameWindowHandle, SW_RESTORE);
+            SetForegroundWindow(gameWindowHandle);
+            Thread.Sleep(500);
+
+            // Open console with Tab key
+            keybd_event((byte)VK_TAB, 0, 0, UIntPtr.Zero);
+            keybd_event((byte)VK_TAB, 0, KEYEVENTF_KEYUP, UIntPtr.Zero);
+            Thread.Sleep(200);
+
+            // Send gamma command with validated value
+            // Use dot as decimal separator for game console
+            string formattedValue = gammaValue.ToString("F2", CultureInfo.InvariantCulture);
+            SendKeys.SendWait($"gamma {formattedValue}");
+            SendKeys.SendWait("{ENTER}");
+
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    /// <summary>
+    /// Validates gamma input - only accepts numbers between 0 and 10
+    /// </summary>
+    /// <param name="input">Input string to validate</param>
+    /// <param name="value">Parsed float value if valid</param>
+    /// <returns>True if valid, false otherwise</returns>
+    private static bool IsValidGammaValue(string input, out float value)
+    {
+        value = 0f;
+
+        if (string.IsNullOrWhiteSpace(input))
+            return false;
+
+        // Try parsing with both comma and dot as decimal separators
+        bool isValid = float.TryParse(input.Replace(',', '.'),
+                                    NumberStyles.Float,
+                                    CultureInfo.InvariantCulture,
+                                    out value);
+
+        // Check if parsing was successful and value is in valid range
+        return isValid && value >= 0f && value <= 10f;
+    }
+
+    /// <summary>
+    /// Interactive method to get gamma value from user with validation
+    /// </summary>
+    public static void SetGammaInteractive()
+    {
+        Console.WriteLine("Enter gamma value (0-10, decimals allowed):");
+        Console.WriteLine("Press Enter to confirm, or 'q' to quit");
+
+        while (true)
+        {
+            Console.Write("Gamma: ");
+            string input = Console.ReadLine();
+
+            if (input?.ToLower() == "q")
+            {
+                Console.WriteLine("Cancelled.");
+                return;
+            }
+
+            if (IsValidGammaValue(input, out float gammaValue))
+            {
+                Console.WriteLine($"Setting gamma to {gammaValue:F2}...");
+
+                if (SetGammaValue(input))
+                {
+                    Console.WriteLine("Gamma value set successfully!");
+                    return;
+                }
+                else
+                {
+                    Console.WriteLine("Failed to set gamma. Make sure ShooterGame is running.");
+                    Console.WriteLine("Try again? (y/n)");
+                    if (Console.ReadLine()?.ToLower() != "y")
+                        return;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid input! Please enter a number between 0 and 10.");
+                Console.WriteLine("Examples: 2.5, 3,7, 5, 0.8");
+            }
         }
     }
 }
