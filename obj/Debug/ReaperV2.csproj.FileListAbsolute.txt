@@ -16,3 +16,4 @@ C:\Users\cedri\source\repos\CedrickGD\ReaperV2\obj\Debug\ReaperV2.csproj.Generat
 C:\Users\cedri\source\repos\CedrickGD\ReaperV2\obj\Debug\ReaperV2.csproj.CoreCompileInputs.cache
 C:\Users\cedri\source\repos\CedrickGD\ReaperV2\obj\Debug\ReaperV2.exe
 C:\Users\cedri\source\repos\CedrickGD\ReaperV2\obj\Debug\ReaperV2.pdb
+C:\Users\cedri\source\repos\CedrickGD\ReaperV2\obj\Debug\ReaperV2.exe.config

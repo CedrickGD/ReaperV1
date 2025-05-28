@@ -40,7 +40,6 @@
             this.Current_Section = new System.Windows.Forms.Label();
             this.Default = new System.Windows.Forms.Button();
             this.Soft = new System.Windows.Forms.Button();
-            this.hard = new System.Windows.Forms.Button();
             this.GenTwo = new System.Windows.Forms.Button();
             this.Pvp = new System.Windows.Forms.Button();
             this.Extinction = new System.Windows.Forms.Button();
@@ -62,6 +61,7 @@
             this.btnOpenBackupPath = new System.Windows.Forms.Button();
             this.btnRestoreSkins = new System.Windows.Forms.Button();
             this.btnDeleteSkins = new System.Windows.Forms.Button();
+            this.bloodstalker_ini = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // MainLabel
@@ -204,26 +204,9 @@
             this.Soft.Name = "Soft";
             this.Soft.Size = new System.Drawing.Size(93, 35);
             this.Soft.TabIndex = 12;
-            this.Soft.Text = "Soft";
+            this.Soft.Text = "Water PvP";
             this.Soft.UseVisualStyleBackColor = false;
             this.Soft.Click += new System.EventHandler(this.Soft_Click);
-            // 
-            // hard
-            // 
-            this.hard.AutoSize = true;
-            this.hard.BackColor = System.Drawing.Color.Transparent;
-            this.hard.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.hard.Cursor = System.Windows.Forms.Cursors.Cross;
-            this.hard.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.hard.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hard.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.hard.Location = new System.Drawing.Point(38, 213);
-            this.hard.Name = "hard";
-            this.hard.Size = new System.Drawing.Size(93, 35);
-            this.hard.TabIndex = 13;
-            this.hard.Text = "Hard";
-            this.hard.UseVisualStyleBackColor = false;
-            this.hard.Click += new System.EventHandler(this.hard_Click);
             // 
             // GenTwo
             // 
@@ -251,11 +234,11 @@
             this.Pvp.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.Pvp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Pvp.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.Pvp.Location = new System.Drawing.Point(38, 336);
+            this.Pvp.Location = new System.Drawing.Point(38, 213);
             this.Pvp.Name = "Pvp";
             this.Pvp.Size = new System.Drawing.Size(93, 35);
             this.Pvp.TabIndex = 16;
-            this.Pvp.Text = "Pvp";
+            this.Pvp.Text = "Strong";
             this.Pvp.UseVisualStyleBackColor = false;
             this.Pvp.Click += new System.EventHandler(this.Pvp_Click);
             // 
@@ -559,6 +542,23 @@
             this.btnDeleteSkins.UseVisualStyleBackColor = false;
             this.btnDeleteSkins.Click += new System.EventHandler(this.btnDeleteSkins_Click);
             // 
+            // bloodstalker_ini
+            // 
+            this.bloodstalker_ini.AutoSize = true;
+            this.bloodstalker_ini.BackColor = System.Drawing.Color.Transparent;
+            this.bloodstalker_ini.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bloodstalker_ini.Cursor = System.Windows.Forms.Cursors.Cross;
+            this.bloodstalker_ini.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.bloodstalker_ini.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bloodstalker_ini.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.bloodstalker_ini.Location = new System.Drawing.Point(38, 336);
+            this.bloodstalker_ini.Name = "bloodstalker_ini";
+            this.bloodstalker_ini.Size = new System.Drawing.Size(93, 35);
+            this.bloodstalker_ini.TabIndex = 46;
+            this.bloodstalker_ini.Text = "Bloodstalker";
+            this.bloodstalker_ini.UseVisualStyleBackColor = false;
+            this.bloodstalker_ini.Click += new System.EventHandler(this.bloodstalker_ini_Click);
+            // 
             // ReaperV1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -567,6 +567,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(1054, 401);
+            this.Controls.Add(this.bloodstalker_ini);
             this.Controls.Add(this.btnDeleteSkins);
             this.Controls.Add(this.btnRestoreSkins);
             this.Controls.Add(this.btnOpenBackupPath);
@@ -587,7 +588,6 @@
             this.Controls.Add(this.Extinction);
             this.Controls.Add(this.Pvp);
             this.Controls.Add(this.GenTwo);
-            this.Controls.Add(this.hard);
             this.Controls.Add(this.Soft);
             this.Controls.Add(this.Default);
             this.Controls.Add(this.Current_Section);
@@ -623,7 +623,6 @@
         private System.Windows.Forms.Label Current_Section;
         private System.Windows.Forms.Button Default;
         private System.Windows.Forms.Button Soft;
-        private System.Windows.Forms.Button hard;
         private System.Windows.Forms.Button GenTwo;
         private System.Windows.Forms.Button Pvp;
         private System.Windows.Forms.Button Extinction;
@@ -645,6 +644,7 @@
         private System.Windows.Forms.Button btnOpenBackupPath;
         private System.Windows.Forms.Button btnRestoreSkins;
         private System.Windows.Forms.Button btnDeleteSkins;
+        private System.Windows.Forms.Button bloodstalker_ini;
     }
 }
 
