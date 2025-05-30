@@ -771,6 +771,13 @@ namespace testrun2
                   "tek_rex_saddle_Layered.uasset",
                   "tek_rex_saddle_N.uasset"
             } },
+            // ------------SADDLE TEK REX HELMET------------ //
+            { Path.Combine(shooterGamePath, "TekTier", "tek_rex_helmet"), new[] {
+                   "rex_tek_helmet_Colorize_d.uasset",
+                   "rex_tek_helmet_Colorize_m.uasset",
+                   "rex_tek_helmet_Layered.uasset",
+                   "rex_tek_helmet_N.uasset"
+            } },
             // ------------SPYGLASS------------ //
             { Path.Combine(shooterGamePath, "WeaponSpyglass", "Textures"), new[] {
                   "T_Spyglass_D.uasset",
@@ -1037,10 +1044,12 @@ namespace testrun2
                    "Torch_DroppedItem_SM.uasset",
                    "Torch_SM.uasset"
             } },
+            // ------------WEAPON TORCH------------ //
             { Path.Combine(shooterGamePath, "WeaponTorch", "Textures"), new[] {
                    "Torch_layered.uasset",
                    "torch_N.uasset"
             } },
+            // ------------WEAPON TORCH------------ //
             { Path.Combine(shooterGamePath, "WeaponTorch", "colorization"), new[] {
                    "Torch_colorize_d.uasset",
                    "Torch_colorize_m.uasset"
