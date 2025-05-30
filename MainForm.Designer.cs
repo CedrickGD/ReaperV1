@@ -204,7 +204,7 @@
             this.Soft.Name = "Soft";
             this.Soft.Size = new System.Drawing.Size(93, 35);
             this.Soft.TabIndex = 12;
-            this.Soft.Text = "Water PvP";
+            this.Soft.Text = "Soft";
             this.Soft.UseVisualStyleBackColor = false;
             this.Soft.Click += new System.EventHandler(this.Soft_Click);
             // 
@@ -221,7 +221,7 @@
             this.GenTwo.Name = "GenTwo";
             this.GenTwo.Size = new System.Drawing.Size(93, 35);
             this.GenTwo.TabIndex = 14;
-            this.GenTwo.Text = "GenTwo";
+            this.GenTwo.Text = "Farmer";
             this.GenTwo.UseVisualStyleBackColor = false;
             this.GenTwo.Click += new System.EventHandler(this.GenTwo_Click);
             // 
@@ -238,7 +238,7 @@
             this.Pvp.Name = "Pvp";
             this.Pvp.Size = new System.Drawing.Size(93, 35);
             this.Pvp.TabIndex = 16;
-            this.Pvp.Text = "Strong";
+            this.Pvp.Text = "Hard";
             this.Pvp.UseVisualStyleBackColor = false;
             this.Pvp.Click += new System.EventHandler(this.Pvp_Click);
             // 

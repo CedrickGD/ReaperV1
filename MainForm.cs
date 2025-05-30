@@ -975,6 +975,24 @@ namespace testrun2
                    "T_TekSuitGen2_Shoes_Colorized_D.uasset",
                    "T_TekSuitGen2_Shoes_Colorized_M.uasset",
                    "T_TekSuitGen2_Shoes_N.uasset"
+            } },
+            { Path.Combine(shooterGamePath, "Test_Henrique", "RocketLauncher", "Textures"), new[] {
+                   "T_RocketLauncher_N.uasset",
+                   "T_RocketLauncher_Layered.uasset",
+                   "T_RocketLauncher_E.uasset",
+                   "T_RocketLauncher_Colorize_m.uasset",
+                   "T_RocketLauncher_Colorize_d.uasset"
+            } },
+            { Path.Combine(shooterGamePath, "Test_Henrique", "RocketLauncher"), new[] {
+                   "RocketLauncher_Colorize_Emissive_MIC.uasset"
+            } },
+            { Path.Combine(shooterGamePath, "WeaponLasso"), new[] {
+                   "T_Lasso_Layered.uasset",
+                   "T_Lasso_N.uasset",
+                   "T_Lasso_D.uasset",
+                   "SM_Lasso_thrown.uasset",
+                   "SM_Lasso_spinning.uasset",
+                   "MM_Lasso.uasset"
             } }
         };
 
