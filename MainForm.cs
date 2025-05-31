@@ -12,7 +12,6 @@ using System.Windows.Forms;
 using WMPLib;
 
 
-
 namespace testrun2
 {
     public partial class ReaperV1 : Form
@@ -1900,6 +1899,11 @@ public class GammaController
             {
                 MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void dragline_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -34,7 +34,7 @@
             this.CloseLabel = new System.Windows.Forms.Label();
             this.MinimizeLabel = new System.Windows.Forms.Label();
             this.INI_Section = new System.Windows.Forms.Label();
-            this.lvlup_underline = new System.Windows.Forms.Label();
+            this.dragline = new System.Windows.Forms.Label();
             this.Canvas_Section = new System.Windows.Forms.Label();
             this.Game_Section = new System.Windows.Forms.Label();
             this.Current_Section = new System.Windows.Forms.Label();
@@ -78,6 +78,8 @@
             this.MainLabel.Click += new System.EventHandler(this.MainLabel_Click);
             this.MainLabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.mouse_down);
             this.MainLabel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.mouse_move);
+            MainLabel.Enabled = true;
+            MainLabel.Visible = true;
             // 
             // CloseLabel
             // 
@@ -119,18 +121,19 @@
             this.INI_Section.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.INI_Section.Click += new System.EventHandler(this.INI_Section_Click);
             // 
-            // lvlup_underline
+            // dragline
             // 
-            this.lvlup_underline.AutoSize = true;
-            this.lvlup_underline.BackColor = System.Drawing.Color.Transparent;
-            this.lvlup_underline.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.lvlup_underline.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lvlup_underline.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(224)))), ((int)(((byte)(76)))));
-            this.lvlup_underline.Location = new System.Drawing.Point(255, -1);
-            this.lvlup_underline.Name = "lvlup_underline";
-            this.lvlup_underline.Size = new System.Drawing.Size(543, 33);
-            this.lvlup_underline.TabIndex = 6;
-            this.lvlup_underline.Text = "_________________________________";
+            this.dragline.AutoSize = true;
+            this.dragline.BackColor = System.Drawing.Color.Transparent;
+            this.dragline.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.dragline.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dragline.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(76)))), ((int)(((byte)(224)))), ((int)(((byte)(76)))));
+            this.dragline.Location = new System.Drawing.Point(255, -1);
+            this.dragline.Name = "dragline";
+            this.dragline.Size = new System.Drawing.Size(543, 33);
+            this.dragline.TabIndex = 6;
+            this.dragline.Text = "_________________________________";
+            this.dragline.Click += new System.EventHandler(this.dragline_Click);
             // 
             // Canvas_Section
             // 
@@ -593,7 +596,7 @@
             this.Controls.Add(this.Current_Section);
             this.Controls.Add(this.Game_Section);
             this.Controls.Add(this.Canvas_Section);
-            this.Controls.Add(this.lvlup_underline);
+            this.Controls.Add(this.dragline);
             this.Controls.Add(this.INI_Section);
             this.Controls.Add(this.MinimizeLabel);
             this.Controls.Add(this.CloseLabel);
@@ -617,7 +620,7 @@
         private System.Windows.Forms.Label CloseLabel;
         private System.Windows.Forms.Label MinimizeLabel;
         private System.Windows.Forms.Label INI_Section;
-        private System.Windows.Forms.Label lvlup_underline;
+        private System.Windows.Forms.Label dragline;
         private System.Windows.Forms.Label Canvas_Section;
         private System.Windows.Forms.Label Game_Section;
         private System.Windows.Forms.Label Current_Section;
